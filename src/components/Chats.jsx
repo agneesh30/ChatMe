@@ -1,9 +1,48 @@
-import React from 'react'
+import { doc, onSnapshot } from 'firebase/firestore';
+import React, { useContext, useState } from 'react'
+import { useEffect } from 'react';
+import styled from "styled-components"
+import { ChatContext } from '../context/ChatContext';
+import { db } from '../firebase';
+import ChatHeader from './ChatHeader';
+import Input from './input';
+import Message from './message';
+
 
 const Chats = () => {
+    const [messages, setMessages] = useState([]);
+    const { data } = useContext(ChatContext);
+
+    useEffect(() => {
+        const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
+            doc.exists() && setMessages(doc.data().messages);
+        });
+
+        return () => {
+            unSub();
+        };
+    }, [data.chatId]);
+
     return (
-        <div>Chats</div>
+        <Wrapper>
+            <ChatHeader />
+            <div className="messages">
+                {messages.map((m) => (
+                    <Message message={m} key={m.id} />
+                ))}
+            </div>
+            <Input />
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.section`
+    flex:3; 
+    .messages{
+        height: calc(100vh - 148px);
+        scrollbar-width: thin;
+        overflow-y:scroll;
+    }
+`;
 
 export default Chats

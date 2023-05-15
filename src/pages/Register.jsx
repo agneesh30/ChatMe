@@ -64,8 +64,7 @@ const Register = () => {
 
     const addUserChats = async (res) => {
         console.log("user chats added", res);
-        await setDoc(doc(db, "userChats", res.user.uid), {
-        })
+        await setDoc(doc(db, "userChats", res.user.uid), {})
     }
 
     const addNewUserDoc = async (res) => {

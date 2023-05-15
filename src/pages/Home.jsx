@@ -1,5 +1,5 @@
 import React from 'react'
-import Chat from '../components/Chat'
+import Chats from '../components/Chats'
 import Sidebar from "../components/Sidebar"
 import styled from "styled-components"
 
@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <Wrapper>
             <Sidebar />
-            <Chat />
+            <Chats />
         </Wrapper>
     )
 }

@@ -1,17 +1,17 @@
 import { MoreHoriz, PersonAdd, VideoCall } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from "styled-components"
-import { useAuthContext } from '../context/AuthContextProvider';
+import { ChatContext } from '../context/ChatContext';
 
 const ChatHeader = () => {
-    const { currentUser } = useAuthContext();
+    const { data } = useContext(ChatContext);
 
     return (
         <Wrapper>
             <div className="profile">
                 <Avatar />
-                <h5>{currentUser.displayName}</h5>
+                <h5>{data.user?.displayName}</h5>
             </div>
             <div className="icons">
                 <PersonAdd sx={{ cursor: "pointer" }} />

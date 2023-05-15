@@ -1,23 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from "styled-components"
 import { Logout, Person } from '@mui/icons-material';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 
 import "../index.scss"
-import { useAuthContext } from '../context/AuthContextProvider';
+import { AuthContext } from '../context/AuthContextProvider';
 
 const SidebarHeader = () => {
 
-    const { currentUser } = useAuthContext();
+    const { currentUser } = useContext(AuthContext)
 
     return (
         <Wrapper>
             <h4 className='logo'>Chat Me</h4>
             <div className="icons">
-                <span class="person"><Person /> {currentUser.displayName}</span><Logout onClick={() => signOut(auth)} />
+                <span className="person"><Person /> {currentUser?.displayName}</span><Logout onClick={() => signOut(auth)} />
             </div>
-
         </Wrapper>
     )
 }

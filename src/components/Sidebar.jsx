@@ -1,4 +1,3 @@
-
 import React from 'react'
 import styled from "styled-components"
 import Search from './Search';
@@ -6,15 +5,12 @@ import SidebarHeader from './SidebarHeader';
 import User from './User';
 
 const Sidebar = () => {
+
     return (
         <Wrapper>
             <SidebarHeader />
             <Search />
             <div className="users">
-                <User />
-                <User />
-                <User />
-                <User />
                 <User />
             </div>
         </Wrapper>

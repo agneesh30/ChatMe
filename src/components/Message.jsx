@@ -1,20 +1,28 @@
 import { Avatar } from '@mui/material'
-import React from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import styled from "styled-components"
+import { AuthContext } from '../context/AuthContextProvider';
 
-const Message = () => {
+const Message = ({ message }) => {
+    const { currentUser } = useContext(AuthContext);
+    const ref = useRef();
+
+    useEffect(() => {
+        ref.current?.scrollIntoView({ behavior: "smooth" });
+    }, [message]);
+
     return (
         <Wrapper>
-            <div className="messageContainer owner">
+            <div className={`messageContainer ${message.senderId === currentUser.uid && "owner"}`} ref={ref} >
                 <div className="messageInfo">
                     <Avatar sx={{ width: "30px", height: "30px" }} />
                     <span>Just Now</span>
                 </div>
                 <div className="content">
                     <span className="message">
-                        This is my recent message
+                        {message.text}
                     </span>
-                    <img src="https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture.jpg" alt="image1" />
+                    {message.img && <img src={message.img} alt="" />}
                 </div>
             </div>
         </Wrapper>
@@ -36,7 +44,6 @@ const Wrapper = styled.section`
             display:flex;
             flex-direction:column;
             .message{
-                max-width:70%;
                 width:fit-content;
                 font-size:0.9rem;
                 background-color:#FFF;
@@ -59,7 +66,6 @@ const Wrapper = styled.section`
             flex-direction:column;
             align-items:flex-end;
             .message{
-                max-width:80%;
                 background-color:#146C94;
                 width:fit-content;
                 font-size:0.9rem;
