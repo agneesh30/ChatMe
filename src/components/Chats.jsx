@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import styled from "styled-components"
 import { ChatContext } from '../context/ChatContext';
 import { db } from '../firebase';
+import ChatBox from './ChatBox';
 import ChatHeader from './ChatHeader';
-import Input from './input';
 import Message from './message';
 
 
@@ -31,7 +31,7 @@ const Chats = () => {
                     <Message message={m} key={m.id} />
                 ))}
             </div>
-            <Input />
+            <ChatBox />
         </Wrapper>
     )
 }
