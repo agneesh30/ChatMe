@@ -6,7 +6,7 @@ import { ChatContext } from '../context/ChatContext';
 import { db } from '../firebase';
 import ChatBox from './ChatBox';
 import ChatHeader from './ChatHeader';
-import Message from './message';
+import Message from './Message';
 
 
 const Chats = () => {
