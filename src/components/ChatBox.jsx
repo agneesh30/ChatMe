@@ -11,7 +11,7 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
-import { v4 as uuid } from "uuid";
+import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 
@@ -24,7 +24,7 @@ const ChatBox = () => {
 
     const handleSend = async () => {
         if (img) {
-            const storageRef = ref(storage, uuid());
+            const storageRef = ref(storage, v4());
 
             const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -36,7 +36,7 @@ const ChatBox = () => {
                     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                         await updateDoc(doc(db, "chats", data.chatId), {
                             messages: arrayUnion({
-                                id: uuid(),
+                                id: v4(),
                                 text,
                                 senderId: currentUser.uid,
                                 date: Timestamp.now(),
